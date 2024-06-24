@@ -10,21 +10,25 @@
 <body>
     <div class="content">
         <h1>Frases Motivadoras</h1>
-        <p id="frase">{{ frase }}</p>
-        <img id="motivational-gif" src="{{ gif_url }}" alt="Motivational GIF">
+        <p id="frase">Cargando frase...</p>
+        <img id="motivational-gif" src="#" alt="Motivational GIF">
         <button onclick="fetchNewPhrase()">Siguiente Frase</button>
     </div>
     <script>
         function fetchNewPhrase() {
-            $.get("/", function(data) {
-                const parser = new DOMParser();
-                const htmlDocument = parser.parseFromString(data, "text/html");
-                const newPhrase = htmlDocument.documentElement.querySelector("#frase").innerHTML;
-                const newGif = htmlDocument.documentElement.querySelector("#motivational-gif").src;
-                document.getElementById("frase").innerHTML = newPhrase;
-                document.getElementById("motivational-gif").src = newGif;
+            $.getJSON("/get-phrase", function(data) {
+                document.getElementById("frase").innerHTML = data.frase;
+                document.getElementById("motivational-gif").src = data.gif_url;
+            }).fail(function() {
+                console.error("Error al cargar nueva frase o GIF.");
+                document.getElementById("frase").innerHTML = "Error al cargar nueva frase.";
+                document.getElementById("motivational-gif").src = "#";
             });
         }
+        
+        $(document).ready(function() {
+            fetchNewPhrase();
+        });
     </script>
 </body>
 </html>
