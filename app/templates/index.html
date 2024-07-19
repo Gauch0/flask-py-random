@@ -5,30 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frases Motivadoras</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="content">
         <h1>Frases Motivadoras</h1>
-        <p id="frase">Cargando frase...</p>
-        <img id="motivational-gif" src="#" alt="Motivational GIF">
-        <button onclick="fetchNewPhrase()">Siguiente Frase</button>
+        <p>{{ frase }}</p>
+        <img class="gif-image" src="{{ gif_url }}" alt="Motivational GIF">
+        <br>
+        <button onclick="window.location.reload();">Siguiente Frase</button>
     </div>
-    <script>
-        function fetchNewPhrase() {
-            $.getJSON("/get-phrase", function(data) {
-                document.getElementById("frase").innerHTML = data.frase;
-                document.getElementById("motivational-gif").src = data.gif_url;
-            }).fail(function() {
-                console.error("Error al cargar nueva frase o GIF.");
-                document.getElementById("frase").innerHTML = "Error al cargar nueva frase.";
-                document.getElementById("motivational-gif").src = "#";
-            });
-        }
-        
-        $(document).ready(function() {
-            fetchNewPhrase();
-        });
-    </script>
 </body>
 </html>

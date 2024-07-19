@@ -12,15 +12,16 @@ body {
     margin: 30px auto;
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
 
-img {
-    width: 100%;
+img.gif-image {
+    max-width: 100%;
     height: auto;
     border-radius: 8px;
     margin-top: 20px;
+    width: 300px; /* Ajusta este valor según el tamaño deseado */
 }
 
 button {
